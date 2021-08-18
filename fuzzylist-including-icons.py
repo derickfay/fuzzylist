@@ -8,7 +8,7 @@ import json
 import os
 
 theFile=sys.argv[1]
-fieldnames=["title","subtitle","arg"]
+fieldnames=["title","subtitle","arg","iconfile"]
 
 json_filename = theFile.split(".")[0]+".json"
 
@@ -24,6 +24,7 @@ def convert(csv_filename, json_filename, fieldnames):
 
 	for r in csv_reader:
 		r['uid']=r['arg']
+		r['icon']={"path":r['iconfile']}
 		data = data+json.dumps(r)+",\n"
 	
 	jsonf.write(data[:-2]) 

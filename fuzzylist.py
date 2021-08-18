@@ -2,15 +2,16 @@
 
 from __future__ import print_function
 
-theFile="list.csv"
-fieldnames=["title","subtitle","arg"]
-
-json_filename = theFile.split(".")[0]+".json"
-
 import csv
 import sys
 import json
 import os
+
+theFile=sys.argv[1]
+fieldnames=["title","subtitle","arg"]
+
+json_filename = theFile.split(".")[0]+".json"
+
 
 def convert(csv_filename, json_filename, fieldnames):
 	f=open(csv_filename, 'r')
