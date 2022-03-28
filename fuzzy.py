@@ -1,5 +1,7 @@
-#!/usr/bin/python
-# encoding: utf-8
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+
 #
 # Copyright (c) 2017 Dean Jackson <deanishe@deanishe.net>
 #
@@ -260,7 +262,7 @@ class Cache(object):
 
     def __init__(self, cmd):
         self.cmd = cmd
-        self.cache_dir = os.path.join(os.getenv('alfred_workflow_cache'),
+        self.cache_dir = os.path.join(os.getenv('alfred_workflow_cache',default=None),
                                       '_fuzzy')
         self._cache_path = None
         self._session_id = None
@@ -276,7 +278,7 @@ class Cache(object):
         sid = self.session_id
         if self._from_cache and os.path.exists(self.cache_path):
             log('loading cached items ...')
-            with open(self.cache_path) as fp:
+            with open(self.cache_path, 'r') as fp:
                 js = fp.read()
         else:
             log('running command %r ...', self.cmd)
@@ -293,7 +295,7 @@ class Cache(object):
 
             log('added session id %r to results', sid)
 
-            with open(self.cache_path, 'wb') as fp:
+            with open(self.cache_path, 'w') as fp:
                 json.dump(fb, fp)
                 log('cached script results to %r', self.cache_path)
 
@@ -317,7 +319,7 @@ class Cache(object):
         """Return cache path for this session."""
         if not self._cache_path:
             if not os.path.exists(self.cache_dir):
-                os.makedirs(self.cache_dir, 0700)
+                os.makedirs(self.cache_dir, 0o700)
                 log('created cache dir %r', self.cache_dir)
 
             self._cache_path = os.path.join(self.cache_dir,
@@ -360,3 +362,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
