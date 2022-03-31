@@ -26,7 +26,7 @@ If your Script Filter (using Language = /bin/bash) looks like this:
 Change it to this:
 
     export query="$1"
-    ./fuzzy.py /usr/bin/python myscript.py
+    ./fuzzy.py /usr/bin/env python3 myscript.py
 
 Your script will be run once per session (while the use is using your
 workflow) to retrieve and cache all items, then the items are filtered
@@ -129,13 +129,13 @@ class Fuzzy(object):
         Returns:
             dict: ``fb`` with items sorted/removed.
         """
-        fold = isascii(query)
+#       fold = isascii(query)
         items = []
 
         for it in fb['items']:
             title = it['title']
-            if fold:
-                title = fold_diacritics(title)
+#           if fold:
+#               title = fold_diacritics(title)
 
             ok, score = self.match(query, title)
             if not ok:
@@ -231,7 +231,7 @@ class Fuzzy(object):
                     best_letter_idx = s_idx
                     best_letter_score = new_score
 
-                prev_match = True
+                    prev_match = True
 
             else:
                 score += unmatched_penalty
@@ -351,7 +351,7 @@ def main():
     fb = cache.load()
 
     if query:
-        query = decode(query)
+#        query = decode(query)
         fz = Fuzzy()
         fz.filter_feedback(fb, query)
         log('%d item(s) match %r', len(fb['items']), query)
