@@ -1,5 +1,7 @@
 # fuzzylist
-Fuzzy, self-updating list filter workflow for Alfred 3 and 4
+Fuzzy, self-updating list filter workflow for Alfred 4
+
+v.  0.3 (2022-03-30) now uses Python 3 and runs on MacOS 12.3
 
 This is a workflow template - it does nothing as is.  It includes sample data and icons which you'll want to replace.
 
